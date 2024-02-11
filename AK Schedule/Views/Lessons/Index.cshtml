@@ -1,0 +1,44 @@
+﻿@model List<AK_Schedule.Models.Lesson>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пример таблицы</title>
+</head>
+<body>
+
+    <h2>Расписание уроков</h2>
+
+    <div>
+        @for (int dayOfWeek = 1; dayOfWeek <= 6; dayOfWeek++)
+        {
+            <h3>@Enum.GetName(typeof(DayOfWeek), dayOfWeek)</h3>
+
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Время урока</th>
+                        <th>Предмет</th>
+                        <th>Учитель</th>
+                        <th>Кабинет</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var lesson in Model.Where(l => l.Day == dayOfWeek))
+                    {
+                        <tr>
+                            <td>@lesson.StartTime?.ToString("hh\\:mm") - @lesson.EndTime?.ToString("hh\\:mm")</td>
+                            <td>@lesson.Subject</td>
+                            <td>@lesson.TeacherFormatted</td>
+                            <td>@lesson.Classroom</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+
+</body>
+</html>
