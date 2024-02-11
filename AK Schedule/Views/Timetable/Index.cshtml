@@ -1,4 +1,4 @@
-﻿@model List<AK_Schedule.Models.Lesson>
+﻿@model List<AK_Schedule.Models.TimetableAll>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,9 +29,9 @@
                     @foreach (var lesson in Model.Where(l => l.Day == dayOfWeek))
                     {
                         <tr>
-                            <td>@lesson.StartTime?.ToString("hh\\:mm") - @lesson.EndTime?.ToString("hh\\:mm")</td>
+                            <td>@lesson.Starttime?.ToString("hh\\:mm") - @lesson.Endtime?.ToString("hh\\:mm")</td>
                             <td>@lesson.Subject</td>
-                            <td>@lesson.TeacherFormatted</td>
+                            <td>@lesson.Teacher</td>
                             <td>@lesson.Classroom</td>
                         </tr>
                     }

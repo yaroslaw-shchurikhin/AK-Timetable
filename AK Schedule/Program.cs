@@ -2,17 +2,16 @@ using AK_Schedule.Models;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using AK_Schedule.Data;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<AK_ScheduleContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("AK_ScheduleContext") ?? throw new InvalidOperationException("Connection string 'AK_ScheduleContext' not found.")));
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<AkScheduleContext>(options =>
+	options.UseNpgsql(builder.Configuration.GetConnectionString("AkScheduleContext")));
 
-builder.Services.AddDbContext<AK_ScheduleContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("AK_ScheduleContext")));
 
 var app = builder.Build();
 

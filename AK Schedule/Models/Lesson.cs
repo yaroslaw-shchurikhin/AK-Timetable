@@ -1,64 +1,33 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Configuration;
+﻿using System;
+using System.Collections.Generic;
 
-namespace AK_Schedule.Models
+namespace AK_Schedule.Models;
+
+public partial class Lesson
 {
-    [Table("Timetable_All")]
-    public class Lesson
-    {
-        [Column("id")]  // Указываем точное имя столбца
-        public int Id { get; set; }
+    public int LessonId { get; set; }
 
-        [Column("grade")]
-        public String? Grade { get; set; }
+    public int? ClassId { get; set; }
 
-        [Column("classroom")]
-        public String? Classroom { get; set; }
+    public int? ClassroomId { get; set; }
 
-        [Column("teacher")]
-        public String? Teacher { get; set; }
+    public int? SubjectId { get; set; }
 
-        [Column("subject")]
-        public String? Subject { get; set; }
+    public int? TeacherId { get; set; }
 
-        [Column("day")]
-        public int? Day { get; set; }
+    public int? DayId { get; set; }
 
-        [Column("starttime")]
-        [DataType(DataType.Time)]
-        public TimeOnly? StartTime { get; set; }
+    public int? LtimeId { get; set; }
 
-        [Column("endtime")]
-        [DataType(DataType.Time)]
-        public TimeOnly? EndTime { get; set; }
+    public virtual Class? Class { get; set; }
 
-        [Column("lesson_num")]
-        public int? LessonNum { get; set; }
+    public virtual Classroom? Classroom { get; set; }
 
-        [NotMapped] // Это свойство не отображается в базе данных
-        public string TeacherFormatted
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(Teacher))
-                    return string.Empty;
+    public virtual Weekday? Day { get; set; }
 
-                var nameParts = Teacher.Split(' ');
+    public virtual LessonTime? Ltime { get; set; }
 
-                if (nameParts.Length >= 1)
-                {
-                    // Фамилия
-                    var lastName = nameParts[0];
+    public virtual Subject? Subject { get; set; }
 
-                    // Инициалы имени и отчества
-                    var initials = nameParts.Skip(1).Select(p => p.Length > 0 ? p[0].ToString() + "." : string.Empty);
-
-                    return $"{lastName} {string.Join(" ", initials)}";
-                }
-
-                return Teacher;
-            }
-        }
-    }
+    public virtual Teacher? Teacher { get; set; }
 }

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AK Schedule", "AK Schedule\AK Schedule.csproj", "{F833CE64-E2FC-44C1-904F-65449E4D42DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AK Schedule", "AK Schedule\AK Schedule.csproj", "{F833CE64-E2FC-44C1-904F-65449E4D42DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
