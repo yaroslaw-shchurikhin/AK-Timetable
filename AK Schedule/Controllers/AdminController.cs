@@ -35,6 +35,7 @@ namespace AK_Schedule.Controllers
             var lessons = _context.TimetableAlls.Where(l => l.Grade == grade.ToString()).ToList(); // Получение данных из базы данных
             var lessonViewModels = lessons.Select(lesson => new TimetableAll
             {
+                Id = lesson.Id,
                 Grade = lesson.Grade,
                 Classroom = lesson.Classroom,
                 Subject = lesson.Subject,

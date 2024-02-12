@@ -29,7 +29,7 @@
                     @foreach (var lesson in Model.Where(l => l.Day == dayOfWeek))
                     {
                         <tr>
-                            <td>@lesson.Starttime?.ToString("hh\\:mm") - @lesson.Endtime?.ToString("hh\\:mm")</td>
+                            <td>@lesson.Starttime?.ToString("HH\\:mm") - @lesson.Endtime?.ToString("HH\\:mm")</td>
                             <td>@lesson.Subject</td>
                             <td>@lesson.Teacher</td>
                             <td>@lesson.Classroom</td>

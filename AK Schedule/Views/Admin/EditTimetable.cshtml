@@ -9,64 +9,40 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Grade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Classroom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Day)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Starttime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Endtime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Subject)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Teacher)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Grade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Classroom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Day)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Starttime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Endtime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Subject)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Teacher)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<h2>Расписание уроков</h2>
+
+<div>
+    @for (int dayOfWeek = 1; dayOfWeek <= 6; dayOfWeek++)
+    {
+        <h3>@Enum.GetName(typeof(DayOfWeek), dayOfWeek)</h3>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Время урока</th>
+                    <th>Предмет</th>
+                    <th>Учитель</th>
+                    <th>Кабинет</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var lesson in Model.Where(l => l.Day == dayOfWeek))
+                {
+                    var lid = lesson.Id + 1;
+                    <tr>
+                        <td>@lesson.Starttime?.ToString("HH\\:mm") - @lesson.Endtime?.ToString("HH\\:mm")</td>
+                        <td>@lesson.Subject</td>
+                        <td>@lesson.Id</td>
+                        <td>@lesson.Teacher</td>
+                        <td>@lesson.Classroom</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = lid }) |
+                            @Html.ActionLink("Details", "Details", new { id = lid }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = lid })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
